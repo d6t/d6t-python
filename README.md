@@ -40,19 +40,18 @@ Enhances `pd.merge()` function with:
 [https://github.com/d6t/d6tjoin](https://github.com/d6t/d6tjoin)
 
 
-## [Get Data](https://github.com/d6t/d6tpipe)
+## [Sync Data](https://github.com/d6t/d6tpipe)
 
-Quickly exchange data, for example between data vendors and consumers, data engineers and data scientists or teachers and students. In just a few lines of code, you can push and pull data to/from S3 and ftp in a simple and unified framework.
+Quickly exchange data, for example between data vendors and consumers, data engineers and data scientists, teachers and students or desktop and laptop. In just a few lines of code, you can push and pull data to/from S3 and ftp in a simple and unified framework. 
 
-**Currently in alpha, coming soon**
+It's like git for data! But better because you can include it in your data science code.
 
 ### Features include
 
-* Publish data on s3/ftp
-* Shared meta-data schema
-* Manage access permissions
-* Sync to local from s3/ftp
+* Push/pull data to/from s3/ftp
 * Schedule regular sync tasks
+* Manage access permissions
+* Include DDL so others can quickly ingest 
 
 [https://github.com/d6t/d6tpipe](https://github.com/d6t/d6tpipe)
 
