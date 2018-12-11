@@ -6,38 +6,10 @@ DataBolt is a collection of python-based products and libraries to reduce the ti
 
 It is designed for data scientists and data engineers who appreciate open data exchange and want to reduce frictions in data pipelines.
 
-
-## [Ingest Data](https://github.com/d6t/d6tstack)
-
-Automatically combine multiple files into one by stacking them together. Works for XLS, CSV, TXT which can be exported to CSV, Parquet, SQL and Pandas.
-
-Vendors often send large datasets in multiple files. Often there are missing and misaligned columns between files that have to be manually cleaned. With d6tstack you can quickly ingest them.
-
-### Features include
-
-* Quickly check columns for consistency across files
-* Fix added/missing columns
-* Fix renamed columns
-* Check Excel tabs for consistency across files
-* Excel to CSV converter (incl multi-sheet support)
-* Export CSV, Parquet, SQL and Pandas
-* Out of core functionality to process large files
-
-[https://github.com/d6t/d6tstack](https://github.com/d6t/d6tstack)
-
-
-## [Combine Data](https://github.com/d6t/d6tjoin)
-
-Easily join different datasets even if they don't perfectly match without writing custom code. Does best match joins on strings, dates and numbers. For example you can quickly join similar but not identical stock tickers, addresses, names and dates without manual processing.
-
-### Features include
-Enhances `pd.merge()` function with:
-* Pre join diagnostics to identify mismatched join keys
-* Best match joins that finds the top1 most similar value
-	* Quickly join stock identifiers, addresses, names without manual processing
-	* Ability to customize similarity functions, set max difference and other advanced features
-
-[https://github.com/d6t/d6tjoin](https://github.com/d6t/d6tjoin)
+It covers the early stages of the data engineering/data science workflow:  
+* sync data: quickly pull/push data from/to a source
+* ingest data: quickly ingest raw files to a database, parquet or pandas
+* join data: quickly combine multiple datasets even if they don't perfectly match
 
 
 ## [Sync Data](https://github.com/d6t/d6tpipe)
@@ -54,6 +26,38 @@ It's like git for data! But better because you can include it in your data scien
 * Include DDL so others can quickly ingest 
 
 [https://github.com/d6t/d6tpipe](https://github.com/d6t/d6tpipe)
+
+
+## [Ingest Data](https://github.com/d6t/d6tstack)
+
+Quickly ingest raw files. Works for XLS, CSV, TXT which can be exported to CSV, Parquet, SQL and Pandas. d6tstack solves many performance and other problems typically encountered when ingesting raw files.
+
+### Features include
+
+* Quickly check columns for consistency across files
+* Fix added/missing columns
+* Fix renamed columns
+* Check Excel tabs for consistency across files
+* Excel to CSV converter (incl multi-sheet support)
+* Export CSV, Parquet, SQL and Pandas
+* Out of core functionality to process large files
+* Fast pd.to_sql() for postgres and mysql
+
+[https://github.com/d6t/d6tstack](https://github.com/d6t/d6tstack)
+
+
+## [Combine Data](https://github.com/d6t/d6tjoin)
+
+Easily join different datasets even if they don't perfectly match without writing custom code. Does best match joins on strings, dates and numbers. For example you can quickly join similar but not identical stock tickers, addresses, names and dates without manual processing.
+
+### Features include
+Enhances `pd.merge()` function with:
+* Pre join diagnostics to identify mismatched join keys
+* Best match joins that finds the top1 most similar value
+	* Quickly join stock identifiers, addresses, names without manual processing
+	* Ability to customize similarity functions, set max difference and other advanced features
+
+[https://github.com/d6t/d6tjoin](https://github.com/d6t/d6tjoin)
 
 
 ## [Blog](http://blog.databolt.tech)
