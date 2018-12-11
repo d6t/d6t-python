@@ -7,8 +7,8 @@ DataBolt is a collection of python-based products and libraries to reduce the ti
 It is designed for data scientists and data engineers who appreciate open data exchange and want to reduce frictions in data pipelines.
 
 It covers the early stages of the data engineering/data science workflow:  
-* sync data: quickly pull/push data from/to a source
-* ingest data: quickly ingest raw files to a database, parquet or pandas
+* sync data: quickly pull/push data from/to a source, directly in python with just a few lines of code
+* ingest data: quickly ingest raw files to a database, parquet or pandas with better performance and features than other loaders
 * join data: quickly combine multiple datasets even if they don't perfectly match
 
 
@@ -34,14 +34,14 @@ Quickly ingest raw files. Works for XLS, CSV, TXT which can be exported to CSV, 
 
 ### Features include
 
-* Quickly check columns for consistency across files
+* Ingest multiple raw files to clean CSV, Parquet, SQL and Pandas
+* Fast pd.to_sql() for postgres and mysql
+* Out of core functionality to process large files
+* Quickly check for potential data schema changes
 * Fix added/missing columns
 * Fix renamed columns
 * Check Excel tabs for consistency across files
 * Excel to CSV converter (incl multi-sheet support)
-* Export CSV, Parquet, SQL and Pandas
-* Out of core functionality to process large files
-* Fast pd.to_sql() for postgres and mysql
 
 [https://github.com/d6t/d6tstack](https://github.com/d6t/d6tstack)
 
