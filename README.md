@@ -7,9 +7,9 @@ DataBolt is a collection of python-based products and libraries to reduce the ti
 It is designed for data scientists and data engineers who appreciate open data exchange and want to reduce frictions in data pipelines.
 
 It covers the early stages of the data engineering/data science workflow:  
-* sync data: quickly pull/push data from/to a source, directly in python with just a few lines of code
-* ingest data: quickly ingest raw files to a database, parquet or pandas with better performance and features than other loaders
-* join data: quickly combine multiple datasets even if they don't perfectly match
+* **sync data**: quickly pull/push data from/to a source, directly in python with just a few lines of code
+* **ingest data**: quickly ingest raw files to sql, parquet or pandas with better performance and features
+* **join data**: quickly combine multiple datasets even if they don't perfectly match
 
 
 ## [Sync Data](https://github.com/d6t/d6tpipe)
@@ -21,7 +21,9 @@ It's like git for data! But better because you can include it in your data scien
 ### Features include
 
 * Push/pull data to/from s3/ftp
-* Schedule regular sync tasks
+* Separate data from code
+* Central file repository across all your data science projects
+* Store access credentials in one place
 * Manage access permissions
 * Include DDL so others can quickly ingest 
 
@@ -38,10 +40,8 @@ Quickly ingest raw files. Works for XLS, CSV, TXT which can be exported to CSV, 
 * Fast pd.to_sql() for postgres and mysql
 * Out of core functionality to process large files
 * Quickly check for potential data schema changes
-* Fix added/missing columns
-* Fix renamed columns
-* Check Excel tabs for consistency across files
-* Excel to CSV converter (incl multi-sheet support)
+* Fix added/missing/renamed columns
+* Export messy Excel files to clean CSV
 
 [https://github.com/d6t/d6tstack](https://github.com/d6t/d6tstack)
 
@@ -53,9 +53,10 @@ Easily join different datasets even if they don't perfectly match without writin
 ### Features include
 Enhances `pd.merge()` function with:
 * Pre join diagnostics to identify mismatched join keys
-* Best match joins that finds the top1 most similar value
+* Best match/fuzzy joins that finds the top1 most similar value
 	* Quickly join stock identifiers, addresses, names without manual processing
-	* Ability to customize similarity functions, set max difference and other advanced features
+	* String and date similarity joins
+	* Pass custom similarity functions
 
 [https://github.com/d6t/d6tjoin](https://github.com/d6t/d6tjoin)
 
