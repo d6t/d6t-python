@@ -10,6 +10,7 @@ It covers the early stages of the data engineering/data science workflow:
 * **sync data**: quickly pull/push data from/to a source, directly in python with just a few lines of code
 * **ingest data**: quickly ingest raw files to sql, parquet or pandas with better performance and features
 * **join data**: quickly combine multiple datasets even if they don't perfectly match
+* **manage data workflows**: manage workflow of data tasks including dependencies
 
 
 ## [Sync Data](https://github.com/d6t/d6tpipe)
@@ -59,6 +60,19 @@ Enhances `pd.merge()` function with:
 	* Pass custom similarity functions
 
 [https://github.com/d6t/d6tjoin](https://github.com/d6t/d6tjoin)
+
+
+## [Manage data workflows](https://github.com/d6t/d6tflow)
+
+Easilly manage data workflows including complex dependencies and parameters. It is built on top of workflow manager [luigi](https://github.com/spotify/luigi) but unlike luigi it is optimized for a data science workflow. It integrates pandas and dask as dataframes and parquet as storage among others. It is compatiable with [d6tpipe](https://github.com/d6t/d6tpipe) for easily sharing data in your workflow.
+
+### Features include
+
+* Build data workflows made up of individual tasks with dependencies
+* Easily load and save dataframes in each task
+* Supports Pandas, Dask, Parquet, CSV, json and pickle
+
+[https://github.com/d6t/d6tflow](https://github.com/d6t/d6tflow)
 
 
 ## [Blog](http://blog.databolt.tech)
