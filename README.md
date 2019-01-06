@@ -4,29 +4,26 @@
 
 DataBolt is a collection of python-based products and libraries to reduce the time it takes to get your data ready for evaluation and analysis.
 
-It is designed for data scientists and data engineers who appreciate open data exchange and want to reduce frictions in data pipelines.
+It is designed for data scientists and data engineers who want to reduce frictions in data pipelines and analysis.
 
 It covers the early stages of the data engineering/data science workflow:  
-* **sync data**: quickly pull/push data from/to a source, directly in python with just a few lines of code
-* **ingest data**: quickly ingest raw files to sql, parquet or pandas with better performance and features
-* **join data**: quickly combine multiple datasets even if they don't perfectly match
-* **manage data workflows**: manage workflow of data tasks including dependencies
+* **sync data**: quickly pull/push data from/to remotes sources and share with others, directly in python with just a few lines of code
+* **ingest data**: quickly ingest messy CSV and XLS files. Export to clean pandas, SQL, parquet
+* **join data**: quickly combine multiple datasets even if they don't perfectly match using fuzzy joins
+* **manage data workflows**: manage workflow of data tasks with dependencies optimized for data science
 
 
 ## [Sync Data](https://github.com/d6t/d6tpipe)
 
 Quickly exchange data, for example between data vendors and consumers, data engineers and data scientists, teachers and students or desktop and laptop. In just a few lines of code, you can push and pull data to/from S3 and ftp in a simple and unified framework. 
 
-It's like git for data! But better because you can include it in your data science code.
+It's like git for data! But better because you can include it in your data science code. This way you can separate data from code: code in git repo, data in a data repo.
 
 ### Features include
 
-* Push/pull data to/from s3/ftp
-* Separate data from code
-* Central file repository across all your data science projects
-* Store access credentials in one place
-* Manage access permissions
-* Include DDL so others can quickly ingest 
+* Quickly create public and private data repos
+* Push/pull data to/from data repos
+* Add read parameters so others can quickly ingest
 
 [https://github.com/d6t/d6tpipe](https://github.com/d6t/d6tpipe)
 
@@ -37,11 +34,8 @@ Quickly ingest raw files. Works for XLS, CSV, TXT which can be exported to CSV, 
 
 ### Features include
 
-* Ingest multiple raw files to clean CSV, Parquet, SQL and Pandas
 * Fast pd.to_sql() for postgres and mysql
-* Out of core functionality to process large files
-* Quickly check for potential data schema changes
-* Fix added/missing/renamed columns
+* Quickly check and fix data schema changes eg added/missing/renamed columns
 * Export messy Excel files to clean CSV
 
 [https://github.com/d6t/d6tstack](https://github.com/d6t/d6tstack)
@@ -52,12 +46,10 @@ Quickly ingest raw files. Works for XLS, CSV, TXT which can be exported to CSV, 
 Easily join different datasets even if they don't perfectly match without writing custom code. Does best match joins on strings, dates and numbers. For example you can quickly join similar but not identical stock tickers, addresses, names and dates without manual processing.
 
 ### Features include
-Enhances `pd.merge()` function with:
+
 * Pre join diagnostics to identify mismatched join keys
 * Best match/fuzzy joins that finds the top1 most similar value
-	* Quickly join stock identifiers, addresses, names without manual processing
-	* String and date similarity joins
-	* Pass custom similarity functions
+* Substring joins
 
 [https://github.com/d6t/d6tjoin](https://github.com/d6t/d6tjoin)
 
