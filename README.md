@@ -7,7 +7,7 @@ DataBolt is a collection of python-based products and libraries to reduce the ti
 It is designed for data scientists and data engineers who want to reduce frictions in data pipelines and analysis.
 
 It covers the early stages of the data engineering/data science workflow:  
-* **push/pull data**: quickly pull/push data like code
+* **push/pull data**: quickly get and share data like code
 * **ingest data**: quickly ingest messy CSV and XLS files
 * **join data**: quickly combine multiple datasets using fuzzy joins
 * **manage data workflows**: quickly build complex data science workflows
@@ -21,8 +21,8 @@ d6tpipe is a python library which makes it easier to exchange data. It's like gi
 
 ### What can it do?
 
-* Quickly create private and public data repos eg s3 or ftp
-* Push/pull data to/from data repos to sync and share data
+* Quickly create private and public data repos on s3 or ftp
+* Push/pull data to/from data repos to get and share data
 * Add schema information so data can be loaded quickly
 
 Learn more at [https://github.com/d6t/d6tpipe](https://github.com/d6t/d6tpipe)
@@ -35,8 +35,8 @@ Quickly ingest raw files. Works for XLS, CSV, TXT which can be exported to CSV, 
 ### What can it do?
 
 * Fast pd.to_sql() for postgres and mysql
-* Quickly check and fix data schema changes eg added/missing/renamed columns
-* Export messy Excel files to clean CSV
+* Check and fix schema problems like added/missing/renamed columns
+* Load and process messy Excel files
 
 Learn more at [https://github.com/d6t/d6tstack](https://github.com/d6t/d6tstack)
 
@@ -48,7 +48,7 @@ Easily join different datasets without writing custom code using fuzzy matches. 
 ### What can it do?
 
 * Identify and diagnose join problems
-* Best match fuzzy joins that finds the top1 most similar value
+* Best match fuzzy joins on strings and dates
 * Best match substring joins
 
 Learn more at [https://github.com/d6t/d6tjoin](https://github.com/d6t/d6tjoin)
