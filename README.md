@@ -4,15 +4,15 @@
 
 DataBolt is a collection of python-based products and libraries to reduce the time it takes to get your data ready for evaluation and analysis.
 
-It is designed for data scientists and data engineers who want to reduce frictions in data pipelines and analysis.
+It is designed for data scientists and data engineers who want to reduce frictions in data pipelines and analysis. 
 
 It covers the early stages of the data engineering/data science workflow:  
 * **push/pull data**: quickly get and share data like code
-* **ingest data**: quickly ingest messy CSV and XLS files
+* **import data**: quickly ingest messy raw CSV and XLS files to pandas, SQL and more
 * **join data**: quickly combine multiple datasets using fuzzy joins
 * **manage data workflows**: quickly build complex data science workflows
 
-The libraries are modularized so you can use them individually but they work well together to improve your entire data workflow.
+The libraries are modularized so you can use them individually but they work well together to improve your entire data workflow. You can experience up to 10x productivity gains.
 
 
 ## [Push/Pull Data](https://github.com/d6t/d6tpipe)
@@ -41,7 +41,7 @@ Quickly ingest raw files. Works for XLS, CSV, TXT which can be exported to CSV, 
 Learn more at [https://github.com/d6t/d6tstack](https://github.com/d6t/d6tstack)
 
 
-## [Combine Data](https://github.com/d6t/d6tjoin)
+## [Join Data](https://github.com/d6t/d6tjoin)
 
 Easily join different datasets without writing custom code using fuzzy matches. Does similarity joins on strings, dates and numbers. For example you can quickly join similar but not identical stock tickers, addresses, names and dates without manual processing.
 
