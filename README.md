@@ -7,12 +7,25 @@ DataBolt is a collection of python-based products and libraries to reduce the ti
 It is designed for data scientists and data engineers who want to reduce frictions in data pipelines and analysis. 
 
 It covers the early stages of the data engineering/data science workflow:  
-* **push/pull data**: quickly get and share data like code
+* **manage data workflows**: quickly build complex data science workflows
+* **push/pull data**: quickly get and share data files like code
 * **import data**: quickly ingest messy raw CSV and XLS files to pandas, SQL and more
 * **join data**: quickly combine multiple datasets using fuzzy joins
-* **manage data workflows**: quickly build complex data science workflows
 
 The libraries are modularized so you can use them individually but they work well together to improve your entire data workflow. You can experience up to 10x productivity gains.
+
+
+## [Manage data workflows](https://github.com/d6t/d6tflow)
+
+Easilly manage data workflows including complex dependencies and parameters. It is built on top of workflow manager luigi but unlike luigi it is optimized for data science workflows. It makes your workflow very clear and intuitive.
+
+### What can it do?
+
+* Build a data workflow made up of tasks with dependencies and parameters
+* Intelligently rerun workflow after changing parameters, code or data
+* Quickly load task input and output data without manual work
+
+Learn more at [https://github.com/d6t/d6tflow](https://github.com/d6t/d6tflow)
 
 
 ## [Push/Pull Data](https://github.com/d6t/d6tpipe)
@@ -21,8 +34,8 @@ d6tpipe is a python library which makes it easier to exchange data. It's like gi
 
 ### What can it do?
 
-* Quickly create private and public data repos on s3 or ftp
-* Push/pull data to/from data repos to get and share data
+* Quickly create public and private remote file storage on AWS S3 and ftp
+* Push/pull data to/from remote file storage to sync files and share with others
 * Add schema information so data can be loaded quickly
 
 Learn more at [https://github.com/d6t/d6tpipe](https://github.com/d6t/d6tpipe)
@@ -52,19 +65,6 @@ Easily join different datasets without writing custom code using fuzzy matches. 
 * Best match substring joins
 
 Learn more at [https://github.com/d6t/d6tjoin](https://github.com/d6t/d6tjoin)
-
-
-## [Manage data workflows](https://github.com/d6t/d6tflow)
-
-Easilly manage data workflows including complex dependencies and parameters. It is built on top of workflow manager luigi but unlike luigi it is optimized for data science workflows. It makes your workflow very clear and intuitive.
-
-### What can it do?
-
-* Build a data workflow made up of tasks with dependencies and parameters
-* Intelligently rerun workflow after changing parameters, code or data
-* Quickly load task input and output data without manual work
-
-Learn more at [https://github.com/d6t/d6tflow](https://github.com/d6t/d6tflow)
 
 
 ## [Blog](http://blog.databolt.tech)
