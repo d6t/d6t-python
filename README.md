@@ -6,8 +6,11 @@ DataBolt is a collection of python-based products and libraries to reduce the ti
 
 It is designed for data scientists and data engineers who want to reduce frictions in data pipelines and analysis. 
 
-It covers the early stages of the data engineering/data science workflow:  
-* **manage data workflows**: quickly build complex data science workflows
+It covers the early stages of the data engineering/data science workflow
+
+![Databolt Workflow](overview.png "Databolt Workflow")
+
+* **manage data workflows**: quickly build highly effective data science workflows
 * **push/pull data**: quickly get and share data files like code
 * **import data**: quickly ingest messy raw CSV and XLS files to pandas, SQL and more
 * **join data**: quickly combine multiple datasets using fuzzy joins
