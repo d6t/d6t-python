@@ -2,7 +2,7 @@
 
 ## Databolt python libraries
 
-For data scientists and data engineers, DataBolt is a collection of python-based products and libraries to reduce the time it takes to get your data ready for analysis and collaborate with others.
+For data scientists and data engineers, DataBolt is a collection of python-based libraries and products to reduce the time it takes to get your data ready for analysis and collaborate with others.
 
 Majority of time in data science is spent on tedious tasks unrelated to data analysis. DataBolt simplifies those tasks so you can experience up to 10x productivity gains.
 
