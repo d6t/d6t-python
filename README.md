@@ -1,12 +1,10 @@
-# Databolt python libraries
+# Accelerate Data Science
 
-## Accelerate data engineering
+## Databolt python libraries
 
-DataBolt is a collection of python-based products and libraries to reduce the time it takes to get your data ready for evaluation and analysis.
+For data scientists and data engineers, DataBolt is a collection of python-based products and libraries to reduce the time it takes to get your data ready for analysis and collaborate with others.
 
-It is designed for data scientists and data engineers who want to reduce frictions in data pipelines and analysis. 
-
-It covers the early stages of the data engineering/data science workflow
+Majority of time in data science is spent on tedious tasks unrelated to data analysis. DataBolt simplifies those tasks so you can experience up to 10x productivity gains.
 
 ![Databolt Workflow](overview.png "Databolt Workflow")
 
@@ -15,12 +13,12 @@ It covers the early stages of the data engineering/data science workflow
 * **import data**: quickly ingest messy raw CSV and XLS files to pandas, SQL and more
 * **join data**: quickly combine multiple datasets using fuzzy joins
 
-The libraries are modularized so you can use them individually but they work well together to improve your entire data workflow. You can experience up to 10x productivity gains.
+The libraries are modularized so you can use them individually but they work well together to improve your entire data workflow. 
 
 
 ## [Manage data workflows](https://github.com/d6t/d6tflow)
 
-Easilly manage data workflows including complex dependencies and parameters. It is built on top of workflow manager luigi but unlike luigi it is optimized for data science workflows. It makes your workflow very clear and intuitive.
+Easily manage data workflows including complex dependencies and parameters. With d6tflow you can easily chain together complex data flows and intelligently execute them. You can quickly load input and output data for each task. It makes your workflow very clear and intuitive.
 
 ### What can it do?
 
