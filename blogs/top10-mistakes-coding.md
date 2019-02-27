@@ -1,6 +1,6 @@
 # Top 10 Coding Mistakes Made by Data Scientists
 
-A data scientist is a "person who is better at statistics than any software engineer and better at software engineering than any statistician". Many data scientists have a statistics background and little experience with software engineering. I'm a top 1% ranked data scientist on Stackoverflow for python coding and work with a lot of (junior) data scientists. Here is my list of 10 common mistakes I frequently see.
+A data scientist is a "person who is better at statistics than any software engineer and better at software engineering than any statistician". Many data scientists have a statistics background and little experience with software engineering. I'm a senior data scientist ranked top 1% on Stackoverflow for python coding and work with a lot of (junior) data scientists. Here is my list of 10 common mistakes I frequently see.
 
 ## 1. Don't share data referenced in code
 
@@ -160,5 +160,7 @@ Lets conclude with a controversial one: jupyter notebooks are as common as CSVs.
 3. You don't modularize your code
 4. Code and output gets mixed in one file
 5. They don't version control well
+
+It feels easy to get started but scales poorly.
 
 **Solution**: Use [pycharm](https://www.jetbrains.com/pycharm/) and/or [spyder](https://www.spyder-ide.org/).
