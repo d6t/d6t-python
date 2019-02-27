@@ -1,6 +1,6 @@
 # Top 10 Coding Mistakes Made by Data Scientists
 
-A data scientist is a "person who is better at statistics than any software engineer and better at software engineering than any statistician". Many data scientists have a statistics background and little experience with software engineering. I'm a 1% ranked data scientist on Stackoverflow for python coding and here is my list of 10 common mistakes I frequently see.
+A data scientist is a "person who is better at statistics than any software engineer and better at software engineering than any statistician". Many data scientists have a statistics background and little experience with software engineering. I'm a top 1% ranked data scientist on Stackoverflow for python coding and work with a lot of (junior) data scientists. Here is my list of 10 common mistakes I frequently see.
 
 ## 1. Don't share data referenced in code
 
@@ -78,7 +78,7 @@ model.fit(df_train.iloc[:,:-1], df_train['y'])
 
 ```
 
-**Solution**: Instead of linearly chaining functions, data science code is better written as a set of tasks with dependencies between them. Use [d6tflow](https://github.com/d6t/d6tflow), [luigi](https://github.com/spotify/luigi) or [airflow](https://airflow.apache.org/).
+**Solution**: Instead of linearly chaining functions, data science code is better written as a set of tasks with dependencies between them. Use [d6tflow](https://github.com/d6t/d6tflow) or [airflow](https://airflow.apache.org/).
 
 ## 6. Write for loops
 
