@@ -158,8 +158,9 @@ Lets conclude with a controversial one: jupyter notebooks are as common as CSVs.
 1. You are tempted to dump all files into one directory
 2. You write code that runs top-bottom instead of DAGs
 3. You don't modularize your code
-4. Code and output gets mixed in one file
-5. They don't version control well
+4. Difficult to debug
+5. Code and output gets mixed in one file
+6. They don't version control well
 
 It feels easy to get started but scales poorly.
 
