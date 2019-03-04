@@ -14,7 +14,7 @@ do_stuff(df)
 
 ```
 
-**Solution**: Use [d6tpipe](https://github.com/d6t/d6tpipe) to share data files with your code, upload to S3/web/google drive etc or save to a database so the recipient can retrieve files (but don't add them to git, see below).
+**Solution**: Use [d6tpipe](https://github.com/d6t/d6tpipe) to share data files with your code or upload to S3/web/google drive etc or save to a database so the recipient can retrieve files (but don't add them to git, see below).
 
 ## 2. Hardcode inaccessible paths
 
@@ -32,7 +32,7 @@ os.chdir('c:\\Users\\yourname\\desktop\\python') # fails
 
 ```
 
-**Solution**: Use relative paths, global config variables or [d6tpipe](https://github.com/d6t/d6tpipe) to make your data easily accessible.
+**Solution**: Use relative paths, global path config variables or [d6tpipe](https://github.com/d6t/d6tpipe) to make your data easily accessible.
 
 ## 3. Mix data with code
 
@@ -48,7 +48,7 @@ Since data science code needs data why not dump it in the same directory? And wh
 ```
 
 **Solution**: Organize your directory into categories, like data, reports, code etc. See [Cookiecutter Data Science
-](https://drivendata.github.io/cookiecutter-data-science/#directory-structure).
+](https://drivendata.github.io/cookiecutter-data-science/#directory-structure) and use tools mentioned in #1 to store and share data.
 
 ## 4. Git commit data with source code
 
@@ -58,7 +58,7 @@ Most people now version control their code (if you don't that's another mistake!
 git add data.csv
 ```
 
-**Solution**: There are a few options, like [d6tpipe](https://github.com/d6t/d6tpipe), [DVC](https://dvc.org/), [Git Large File Storage](https://git-lfs.github.com/) or manually manage with S3/web/google drive.
+**Solution**:  Use tools mentioned in #1 to store and share data. If you really want to version control data, see [d6tpipe](https://github.com/d6t/d6tpipe), [DVC](https://dvc.org/) and [Git Large File Storage](https://git-lfs.github.com/).
 
 ## 5. Write functions instead of DAGs
 
@@ -149,7 +149,7 @@ df_train = pd.read_pickle(df_train)
 
 ```
 
-**Solution**: Use parquet or other binary data formats with data schemas, ideally ones that compress data. [d6tflow](https://github.com/d6t/d6tflow) automatically saves data output of tasks as parquet so you don't have to deal with it.
+**Solution**: Use [parquet](https://github.com/dask/fastparquet) or other binary data formats with data schemas, ideally ones that compress data. [d6tflow](https://github.com/d6t/d6tflow) automatically saves data output of tasks as parquet so you don't have to deal with it.
 
 ## 10. Use jupyter notebooks
 
