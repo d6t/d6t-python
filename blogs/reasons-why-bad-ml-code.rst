@@ -4,7 +4,7 @@
 Your current workflow probably chains several functions together like in the example below. While quick, it likely has many problems:  
 
 * it doesn't scale well as you add complexity
-* you have to manually keep track of which functions were run with which parameter
+* you have to manually keep track of which functions were run with which parameter as you iterate through your workflow
 * you have to manually keep track of where data is saved
 * it's difficult for others to read
 
@@ -15,20 +15,17 @@ Your current workflow probably chains several functions together like in the exa
 
     def get_data():
         data = download_data()
-        data = clean_data(data)
         data.to_pickle('data.pkl')
 
     def preprocess(data):
-        data = apply_function(data)
+        data = clean_data(data)
         return data
 
     # flow parameters
-    reload_source = True
     do_preprocess = True
 
     # run workflow
-    if reload_source:
-        get_data()
+    get_data()
 
     df_train = pd.read_pickle('data.pkl')
     if do_preprocess:
@@ -37,31 +34,36 @@ Your current workflow probably chains several functions together like in the exa
     model.fit(df_train.iloc[:,:-1], df_train['y'])
     print(sklearn.metrics.accuracy_score(df_train['y'],model.predict(df_train.iloc[:,:-1])))
 
-
 What to do about it?
 ------------------------------------------------------------
 
-Instead of linearly chaining functions, data science code is better written as a set of tasks with dependencies between them. That is your data science workflow should be a DAG. 
+Instead of linearly chaining functions, data science code is better written as a set of tasks with dependencies between them. That is your data science workflow should be a DAG.
 
-So instead of writing a function that does:
+[d6tflow](https://github.com/d6t/d6tflow) is a free open-source library which makes it easy for you to build highly effective data science workflows.
+
+Instead of writing a function that does:
 
 .. code-block:: python
 
-    def process_data(data, parameter):
-
-        if parameter:
-            data = do_stuff(data)
-        else:
-            data = do_other_stuff(data)
-
+    def process_data(df, parameter):
+        df = do_stuff(df)
         data.to_pickle('data.pkl')
-        return data
+        return df
 
-You are better of writing tasks that you can chain together as a DAG: 
+    dataraw = download_data()
+    data = process_data(dataraw)
+
+You can write tasks that you can chain together as a DAG:
 
 .. code-block:: python
 
-    class TaskProcess(d6tflow.tasks.TaskPqPandas): # define output format
+    class TaskGetData(d6tflow.tasks.TaskPqPandas):
+
+        def run():
+            data = download_data()
+            self.save(data) # save output data
+
+    class TaskProcess(d6tflow.tasks.TaskPqPandas):
 
         def requires(self):
             return TaskGetData() # define dependency
@@ -71,6 +73,8 @@ You are better of writing tasks that you can chain together as a DAG:
             data = do_stuff(data) # process data
             self.save(data) # save output data
 
+    data = TaskProcess().output().load() # load output data
+
 The benefits of doings this are:
 
 * All tasks follow the same pattern no matter how complex your workflow gets
@@ -78,6 +82,7 @@ The benefits of doings this are:
 * You can quickly load and save data without having to hardcode filenames
 * If the input task is not complete it will automatically run
 * If input data or parameters change, the function will automatically rerun
+* It’s much easier for others to read and understand the workflow
 
 An example machine learning DAG
 ------------------------------------------------------------
