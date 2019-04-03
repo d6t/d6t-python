@@ -73,6 +73,7 @@ You can write tasks that you can chain together as a DAG:
             data = do_stuff(data) # process data
             self.save(data) # save output data
 
+    d6tflow.run(TaskProcess()) # execute task including dependencies
     data = TaskProcess().output().load() # load output data
 
 The benefits of doings this are:
