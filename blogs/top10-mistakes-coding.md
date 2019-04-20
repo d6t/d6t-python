@@ -48,7 +48,7 @@ Since data science code needs data why not dump it in the same directory? And wh
 ```
 
 **Solution**: Organize your directory into categories, like data, reports, code etc. See [Cookiecutter Data Science
-](https://drivendata.github.io/cookiecutter-data-science/#directory-structure) and use tools mentioned in #1 to store and share data.
+](https://drivendata.github.io/cookiecutter-data-science/#directory-structure) or [d6tflow project templates](https://github.com/d6t/d6tflow-template) and use tools mentioned in #1 to store and share data.
 
 ## 4. Git commit data with source code
 
