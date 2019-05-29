@@ -50,7 +50,32 @@ Since both libraries are optimized for data engineering production settings, the
 * Inconvenient to reset tasks as models, parameters and data change
 * Inconvenient to keep track of model results with different parameter settings
 
-![Filenames nightmare](images/d6tflow-filenames.png?raw=true "Filenames nightmare")
+Manually keeping track of filenames in complex data workflows... Not scalable.
+
+```python
+
+# vendor input
+cfg_fpath_cc_base = cfg_fpath_base + 'vendor/'
+cfg_fpath_cc_raw = cfg_fpath_cc_base + 'df_cc_raw.pkl'
+cfg_fpath_cc_raw_recent2 = cfg_fpath_cc_base + 'df_cc_raw_recent2.pkl'
+cfg_fpath_cc_yoy = cfg_fpath_cc_base + 'df_cc_yoy.pkl'
+cfg_fpath_cc_yoy_bbg = cfg_fpath_cc_base + 'df_cc_yoy_bbg.pkl'
+cfg_fpath_cc_yoy_fds = cfg_fpath_cc_base + 'df_cc_yoy_fds.pkl'
+cfg_fpath_cc_var_fds = cfg_fpath_cc_base + 'df_cc_var_fds.pkl'
+cfg_fpath_cc_yoy_recent2 = cfg_fpath_cc_base + 'df_cc_yoy_recent2.pkl'
+cfg_fpath_cc_actual = cfg_fpath_cc_base + 'df_cc_sales_actual.pkl'
+cfg_fpath_cc_monthly = cfg_fpath_cc_base + 'df_cc_monthly.pkl'
+cfg_fpath_cc_yoy_cs2 = 'data/processed/df_cc_yoy_cs2.pq' # consistent shopper data for new methodology from 2018
+
+# market
+cfg_fpath_market_attributes_px = cfg_fpath_base + '/market/df_market_px.pkl'
+cfg_fpath_market_consensus = cfg_fpath_base + '/market/df_market_consensus.pkl'
+cfg_fpath_market_attributes = cfg_fpath_base + '/market/df_market_attributes.pkl'
+cfg_fpath_market_attributes_latest = cfg_fpath_base + '/market/df_market_attributes_latest.pkl'
+cfg_fpath_market_announce = cfg_fpath_base + '/market/df_market_announce.pkl'
+cfg_fpath_market_attributes_latest_fds1 = cfg_fpath_base + '/market/df_market_attributes_latest_fds1.pkl'
+cfg_fpath_market_attributes_latest_fds2 = cfg_fpath_base + '/market/df_market_attributes_latest_fds2.pkl'
+```
 
 ## How d6tflow is different from airflow/luigi
 
