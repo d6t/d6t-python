@@ -43,17 +43,19 @@ In contrast, focus in the R&D workflow is on generating insights and assessing p
 
 ### Problems with airflow/luigi in R&D settings
 
-Both libraries are a big step up for managing data workflows. But since they are optimized for 
+Both libraries are a big step up for managing data workflows. But they are optimized for data engineering production settings, the UX for a data scientist was not great:  
 
 * WET code for reading/writing data
-* Knowing filenames or database/table names where data is saved
+* Manually keep track of filenames or database table names where data is saved
 * Inconvenient to reset tasks as data, models and parameters change
 * Inconvenient to keep track of model results with different parameter settings
+
+d6tflow is optimized for data science settings.
 
 ![Filenames nightmare](images/d6tflow-filenames.png?raw=true "Filenames nightmare")
 
 
-### Tasks have input and ouput data
+### Benefit: Tasks have input and ouput data
 
 Instead of having to manually load and save data, this is handled by library.
 
@@ -69,7 +71,7 @@ class TaskProcess(d6tflow.tasks.TaskPqPandas): # define output format
         self.save(data) # save output data
 ```
 
-### Easily invalidate tasks
+### Benefit: Easily invalidate tasks
 
 Common invalidation scenarios are implemented.
 
@@ -88,7 +90,7 @@ d6tflow.invalidate_upstream(TaskTrain())
 
 ```
 
-### Easily train models using different paramters
+### Benefit: Easily train models using different paramters
 
 Intelligently rerun workflow after changing a preprocessing parameter
 
@@ -102,7 +104,7 @@ d6tflow.preview([TaskTrain(do_preprocess=False)])
 '''
 ```
 
-### Easily compare models
+### Benefit: Easily compare models
 
 Different models that were trained with different parameters can be easily loaded.
 
@@ -134,7 +136,7 @@ https://github.com/d6t/d6tflow-template
 
 To quickly share workflow output files, you can use [d6tpipe](https://github.com/d6t/d6tpipe). See [Sharing Workflows and Outputs](https://d6tflow.readthedocs.io/en/latest/collaborate.html).
 
-Alternatively you can save outputs in a database using d6tflow premium.
+Alternatively you can save outputs in a database using [d6tflow premium](https://pipe.databolt.tech/gui/request-premium/).
 
 ```python
 d6tflow2.db.init('postgresql+psycopg2://usr:pwd@localhost/db', 'schema_name')
