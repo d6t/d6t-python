@@ -6,11 +6,15 @@ A data scientist is a "person who is better at statistics than any software engi
 
 Data scientists want to build the "best" model. But beauty is in the eye of the beholder. If you don't know what the goal and objective function is and how it behaves, it is unlikely you will be able to build the "best" model. The objective may not even be a mathematical function but perhaps improving a business metric.
 
+Example: % time right = accuracy vs f1 metric
+
 **Solution**: most kaggle winners spend a lot of time understanding the objective function and how the data and model relates to the objective function. If you are optimizing a business metric, you need to map it to an appropriate mathematical objective function.
 
 ## 2. Not have a hypothesis why something should work
 
 Commonly data scientists want to build "models". They heard xgboost and random forests work best so lets use those. I read about deep learning, maybe that will improve results further. They throw models at the problem without having looked at the data and without having formed a hypothesis which model is most likely to best capture the features of the data. It makes explaining your work really hard too because you are just randomly throwing models at data.
+
+[example: linear plot vs svm plot]
 
 **Solution**: look at the data! understand its characteristics and form a hypothesis which model is likely to best capture those characteristics. 
 
