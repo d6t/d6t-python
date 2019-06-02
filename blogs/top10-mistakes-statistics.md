@@ -2,7 +2,7 @@
 
 A data scientist is a "person who is better at statistics than any software engineer and better at software engineering than any statistician". In [Top 10 Coding Mistakes Made by Data Scientists](https://github.com/d6t/d6t-python/blob/master/blogs/top10-mistakes-coding.md) we discussed how statisticians can become a better coders. Here we discuss how coders can become better statisticians.
 
-Detailed output and code for each of the examples is available in [github](https://github.com/d6t/d6t-python/tree/master/blogs/top10-mistakes-statistics) and in an [interactive notebook](https://mybinder.org/v2/gh/d6t/d6t-python/master?filepath=blogs%2Ftop10-mistakes-statistics%2Fvisualize.ipynb). The code uses workflow management library [d6tflow](https://github.com/d6t/d6tflow) and data is shared with dataset management library [d6tpipe](https://github.com/d6t/d6tpipe).
+Detailed output and code for each of the examples is available in [github](http://tiny.cc/top10-mistakes-stats-code) and in an [interactive notebook](http://tiny.cc/top10-mistakes-stats-bind). The code uses workflow management library [d6tflow](https://github.com/d6t/d6tflow) and data is shared with dataset management library [d6tpipe](https://github.com/d6t/d6tpipe).
 
 ## 1. Not fully understand objective function
 
@@ -22,7 +22,7 @@ Commonly data scientists want to build "models". They heard xgboost and random f
 **Solution**: look at the data! Understand its characteristics and form a hypothesis which model is likely to best capture those characteristics. 
 
 **Example**: Without running any models by just plotting this sample data, you can already have a strong view that x1 is linearly related with y and x2 doesn't have much of a relationship with y.
-![Example2](top10-mistakes-statistics/reports/example2.png?raw=true "Example2")
+![Example2](images/top10-stats-example2.png?raw=true "Example2")
 
 ## 3. Not looking at the data before interpreting results
 
@@ -31,7 +31,7 @@ Another problem with not looking at the data is that your results can be heavily
 **Solution**: it's so important it's worth repeating: look at the data! Understand how the nature of the data is impacting model results. 
 
 **Example**: with outliers, x1 slope changed from 0.906 to -0.375!
-![Example3](top10-mistakes-statistics/reports/example3.png?raw=true "Example3")
+![Example3](images/top10-stats-example3.png?raw=true "Example3")
 
 ## 4. Not having a naive baseline model
 
