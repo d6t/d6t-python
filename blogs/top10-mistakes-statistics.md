@@ -37,51 +37,36 @@ Modern ML libraries almost make it too easy... Just change a line of code and yo
 
 **Solution**: what's the dumbest way you can predict a value? Build a "model" using the last known value, the (rolling) mean or some constant eg 0. Compare your model performance against a zero-intelligence forecast monkey!
 
-**Example**: With this time series data, model1 must be better than model2 with MSE of 0.21 and 0.45 respectively. But wait! By just taking the last known value, the MSE drops to 0.003!
+**Example**: With this time series dataset, model1 must be better than model2 with MSE of 0.21 and 0.45 respectively. But wait! By just taking the last known value, the MSE drops to 0.003!
 
 ## 5. Insufficient out-sample testing
 
 This is the one that could derail your career! The model you built looked great in R&D works horrible in production. The model you said will do wonders is causing really bad business outcomes, potentially costing the company $m+. It's so important all the remaining mistakes bar the last one focus on it.
 
-[Example: RF vs OLS in sample vs out sample]
-
 **Solution**: Make sure you've run your model in realistic outsample conditions and understand when it will perform well and when it doesn't.
 
-## 6. Incorrect out-sample testing: time series data
+**Example**: In-sample the random forest does a lot better than linear regression with mse 0.048 vs ols mse 0.183 but out-sample it does a lot worse with mse 0.259 vs linear regression mse 0.187. The random forest overtrained and would not perform well live in production!
+
+## 6. Incorrect out-sample testing: applying preprocessing to full dataset
 
 In school you rarely get time series data but in practice most data has a time element to it. If you have data from the future, it might be really easy to make predictions about the past! If you are not careful, any time you do feature engineering or cross-validation, data from the future can easily creep in and inflate performance. 
 
-**Solution**: generate test data such that you capture any time-dependant relationships that could occur in production use.
+**Solution**: make sure you have a true test set free of any leakage from training set. Especially beware of any time-dependant relationships that could occur in production use.
 
-**Example**: Here preprocessing is applied to the full dataset, not seperately for the train and test set.
-
-```python
-
-# bad
-df = scipy.stats.zscore(df) # everything just became training data!
-sklearn.model_selection.cross_validate(model,X,y, cv=10) # mixing training and test data
-
-# better
-for idx_train, idx_test in sklearn.model_selection.KFold(n_splits=10).split(df_ts2):
-	# process train and test data seperately
-    X_train, X_test = scipy.stats.zscore(X[train_index]), scipy.stats.zscore(X[test_index])
-    y_train, y_test = scipy.stats.zscore(y[train_index]), scipy.stats.zscore(y[test_index])
-    m_ols.fit(X_train,y_train)
-    m_ols.predict(X_test) # using true test data
-
-```
+**Example**: Preprocessing is applied to the full dataset BEFORE it is split into train and test, meaning you do not have a true test set. Preprocessing needs to be applied seperately AFTER data is split into train and test sets to make it a true test set. The MSE between the two methods (mixed out-sample CV mse 0.187 vs true out-sample CV mse 0.181) in this case is not all that different because the distributional properties between train and test are not that different but that might not always be the case.
 
 ## 7. Incorrect out-sample testing: cross-sectional data & panel data
 
 You were taught cross-validation is all you need. sklearn even provides you some nice convenience functions so you think you have checked all the boxes. But most cross-validation methods do random sampling so you might end up with training data in your test set which inflates performance.
 
-[Example: ]
+**Solution**: generate test data such that it accurately reflects data on which you would make prdictions in live production use. Especially with time series and panel data you likely will have to generate custom cross-validation data or do roll-forward testing.
 
-**Solution**: generate test data such that you capture any time-dependant relationships that could occur in production use.
+**Example**: here you have panel data for two different entities (eg companies) which are cross-sectionally highly correlated. If you randomly split data you make accurate predictions using data you did not actually have available during test, overstating model performance. You think you avoided mistake #5 by using cross-validation and found the random forest performs a lot better than linear regression in cross-validation. But running a roll-forward out-sample test which prevents future data from leaking into test, it performs a lot worse again! (random forest MSE goes from 0.047
+to 0.211, higher than linear regression!)
 
 ## 8. Not considering which data is available at point of decision
 
-When you run a model in production, it gets fed with data that is available when you run the model. That data might be different than what you assumed to be available in training. For example the data might be published with delay so by the time you run the model other inputs have changed and you are making predictions with wrong data.
+When you run a model in production, it gets fed with data that is available when you run the model. That data might be different than what you assumed to be available in training. For example the data might be published with delay so by the time you run the model other inputs have changed and you are making predictions with wrong data or your true y variable is incorrect.
 
 **Solution**: do a rolling out-sample forward test. If I had used this model in production, what would my training data look like, ie what data do you have to make predictions? That's the training data you use to make a true out-sample production test. Furthermore, think about if you acted on the prediction, what result would that generate at the point of decision?
 
@@ -89,9 +74,9 @@ When you run a model in production, it gets fed with data that is available when
 
 The more time you spend on a dataset, the more likely you are to overtrain it. You keep tinkering with features and optimizing model parameters. You used cross-validation so everything must be good.
 
-Example: [cv optimize rf, apply to another dataset, check if cv test is similar to df1 cv error]
-
 **Solution**: After you have finished building the model, try to find another "version" of the datasets that can be a surrogate for a true out-sample dataset. If you are a manager, deliberately withhold data so that it does not get used for training.
+
+**Example**: Applying the models that were trained on dataset 1 to dataset 2 shows the MSEs more than doubled. Are they still acceptable...? This is a judgement call but your results from #4 might help you decide.
 
 ## 10. "need more data" fallacy
 
