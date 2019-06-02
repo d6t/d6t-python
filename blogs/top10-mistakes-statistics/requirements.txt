@@ -1,0 +1,7 @@
+d6tpipe
+d6tflow
+scikit-learn
+pandas
+scipy
+seaborn
+matplotlib

@@ -2,7 +2,7 @@
 
 A data scientist is a "person who is better at statistics than any software engineer and better at software engineering than any statistician". In [Top 10 Coding Mistakes Made by Data Scientists](https://github.com/d6t/d6t-python/blob/master/blogs/top10-mistakes-coding.md) we discussed how statisticians can become a better coders. Here we discuss how coders can become better statisticians.
 
-Detailed output and code for each of the examples is available in [github](https://github.com/d6t/d6t-python/tree/master/blogs/top10-mistakes-statistics) and in an [interactive notebook](mybinder link). The code uses workflow management library [d6tflow](https://github.com/d6t/d6tflow) and data is shared with dataset management library [d6tpipe](https://github.com/d6t/d6tpipe).
+Detailed output and code for each of the examples is available in [github](https://github.com/d6t/d6t-python/tree/master/blogs/top10-mistakes-statistics) and in an [interactive notebook](https://mybinder.org/v2/gh/d6t/d6t-python/master?filepath=blogs%2Ftop10-mistakes-statistics%2Fvisualize.ipynb). The code uses workflow management library [d6tflow](https://github.com/d6t/d6tflow) and data is shared with dataset management library [d6tpipe](https://github.com/d6t/d6tpipe).
 
 ## 1. Not fully understand objective function
 
@@ -12,7 +12,9 @@ Data scientists want to build the "best" model. But beauty is in the eye of the 
 
 **Example**: F1 score is typically used to assess classification models. We once built a classification model whose success depended on the % of occurrences it was right. The F1 score was misleading because it shows the model was correct ~60% of the time whereas in fact it was correct only 40% of the time.
 
-
+```
+f1 0.571 accuracy 0.4
+```
 ## 2. Not have a hypothesis why something should work
 
 Commonly data scientists want to build "models". They heard xgboost and random forests work best so lets use those. They read about deep learning, maybe that will improve results further. They throw models at the problem without having looked at the data and without having formed a hypothesis which model is most likely to best capture the features of the data. It makes explaining your work really hard too because you are just randomly throwing models at data.
@@ -39,6 +41,12 @@ Modern ML libraries almost make it too easy... Just change a line of code and yo
 
 **Example**: With this time series dataset, model1 must be better than model2 with MSE of 0.21 and 0.45 respectively. But wait! By just taking the last known value, the MSE drops to 0.003!
 
+```
+ols CV mse 0.215
+rf CV mse 0.428
+last out-sample mse 0.003
+```
+
 ## 5. Incorrect out-sample testing
 
 This is the one that could derail your career! The model you built looked great in R&D but performs horrible in production. The model you said will do wonders is causing really bad business outcomes, potentially costing the company $m+. It's so important all the remaining mistakes bar the last one focus on it.
@@ -47,13 +55,24 @@ This is the one that could derail your career! The model you built looked great 
 
 **Example**: In-sample the random forest does a lot better than linear regression with mse 0.048 vs ols mse 0.183 but out-sample it does a lot worse with mse 0.259 vs linear regression mse 0.187. The random forest overtrained and would not perform well live in production!
 
+```
+in-sample
+rf mse 0.04 ols mse 0.183
+out-sample
+rf mse 0.261 ols mse 0.187
+```
+
 ## 6. Incorrect out-sample testing: applying preprocessing to full dataset
 
-In school you rarely get time series data but in practice most data has a time element to it. If you have data from the future, it might be really easy to make predictions about the past! If you are not careful, any time you do feature engineering or cross-validation, data from the future can easily creep in and inflate performance. 
+You probably know that powerful ML models can overtrain. Overtraining means it performs well in-sample but badly out-sample. So you need to be aware of having training data leak into test data. If you are not careful, any time you do feature engineering or cross-validation, train data can creep into test data and inflate model performance. 
 
 **Solution**: make sure you have a true test set free of any leakage from training set. Especially beware of any time-dependent relationships that could occur in production use.
 
-**Example**: Preprocessing is applied to the full dataset BEFORE it is split into train and test, meaning you do not have a true test set. Preprocessing needs to be applied separately AFTER data is split into train and test sets to make it a true test set. The MSE between the two methods (mixed out-sample CV mse 0.187 vs true out-sample CV mse 0.181) in this case is not all that different because the distributional properties between train and test are not that different but that might not always be the case.
+**Example**: This happens a lot. Preprocessing is applied to the full dataset BEFORE it is split into train and test, meaning you do not have a true test set. Preprocessing needs to be applied separately AFTER data is split into train and test sets to make it a true test set. The MSE between the two methods (mixed out-sample CV mse 0.187 vs true out-sample CV mse 0.181) in this case is not all that different because the distributional properties between train and test are not that different but that might not always be the case.
+
+```
+mixed out-sample CV mse 0.187 true out-sample CV mse 0.181
+```
 
 ## 7. Incorrect out-sample testing: cross-sectional data & panel data
 
@@ -61,8 +80,14 @@ You were taught cross-validation is all you need. sklearn even provides you some
 
 **Solution**: generate test data such that it accurately reflects data on which you would make predictions in live production use. Especially with time series and panel data you likely will have to generate custom cross-validation data or do roll-forward testing.
 
-**Example**: here you have panel data for two different entities (eg companies) which are cross-sectionally highly correlated. If you randomly split data you make accurate predictions using data you did not actually have available during test, overstating model performance. You think you avoided mistake #5 by using cross-validation and found the random forest performs a lot better than linear regression in cross-validation. But running a roll-forward out-sample test which prevents future data from leaking into test, it performs a lot worse again! (random forest MSE goes from 0.047
-to 0.211, higher than linear regression!)
+**Example**: here you have panel data for two different entities (eg companies) which are cross-sectionally highly correlated. If you randomly split data you make accurate predictions using data you did not actually have available during test, overstating model performance. You think you avoided mistake #5 by using cross-validation and found the random forest performs a lot better than linear regression in cross-validation. But running a roll-forward out-sample test which prevents future data from leaking into test, it performs a lot worse again! (random forest MSE goes from 0.047 to 0.211, higher than linear regression!)
+
+```
+normal CV
+ols 0.203 rf 0.051
+true out-sample error
+ols 0.166 rf 0.229
+```
 
 ## 8. Not considering which data is available at point of decision
 
@@ -77,6 +102,13 @@ The more time you spend on a dataset, the more likely you are to overtrain it. Y
 **Solution**: After you have finished building the model, try to find another "version" of the datasets that can be a surrogate for a true out-sample dataset. If you are a manager, deliberately withhold data so that it does not get used for training.
 
 **Example**: Applying the models that were trained on dataset 1 to dataset 2 shows the MSEs more than doubled. Are they still acceptable...? This is a judgement call but your results from #4 might help you decide.
+
+```
+first dataset
+rf mse 0.261 ols mse 0.187
+new dataset
+rf mse 0.681 ols mse 0.495
+```
 
 ## 10. "need more data" fallacy
 
