@@ -27,11 +27,15 @@ model.fit(df_train.iloc[:,:-1], df_train['y'])
 
 ## R&D vs production data workflows
 
-Using airflow or luigi is a big step up from writing functional code for managing data workflows. But both libraries are designed to be used by data engineers in production settings where the focus is on making sure everything is running smoothly on time and recovering from failures. 
+Using airflow or luigi is a big step up from writing functional code for managing data workflows. But both libraries are designed to be used by data engineers in production settings where the focus is on:  
+* making sure everything is running smoothly on time  
+* scheduling and coordination  
+* recovering from failures  
+* data quality  
 
 In contrast, focus in the r&d workflow is on:  
-* prototyping speed
 * generating insights
+* prototyping speed
 * assessing predictive power with different models and parameters
 * visualizing output
 
@@ -69,7 +73,7 @@ cfg_fpath_cc_yoy_cs2 = 'data/processed/df_cc_yoy_cs2.pq' # consistent shopper da
 
 # market
 cfg_fpath_market_attributes_px = cfg_fpath_base + '/market/df_market_px.pkl'
-cfg_fpath_market_consensus = cfg_fpath_base + '/market/df_market_consensus.pkl'
+cfg_fpath_market_consensus = cfg_fpath_base + '/market/df_market_consensus.pkl
 cfg_fpath_market_attributes = cfg_fpath_base + '/market/df_market_attributes.pkl'
 cfg_fpath_market_attributes_latest = cfg_fpath_base + '/market/df_market_attributes_latest.pkl'
 cfg_fpath_market_announce = cfg_fpath_base + '/market/df_market_announce.pkl'
@@ -80,6 +84,11 @@ cfg_fpath_market_attributes_latest_fds2 = cfg_fpath_base + '/market/df_market_at
 ## How d6tflow is different from airflow/luigi
 
 d6tflow is optimized for data science research and development workflows. Here are benefits of using d6tflow in data science.
+
+Example workflow:  
+```
+TaskGetData >> TaskProcess >> TaskTrain
+```
 
 ### Benefit: Tasks have input and ouput data
 
@@ -121,7 +130,7 @@ d6tflow.invalidate_upstream(TaskTrain())
 You can intelligently rerun workflow after changing a parameter. Parameters are passed from the target task to the relevant downstream task. Thus, you no longer have to manually keep track of which tasks to update, increasing prototyping speed and reducing errors.
 
 ```python
-d6tflow.preview([TaskTrain(do_preprocess=False)])
+d6tflow.preview(TaskTrain(do_preprocess=False))
 
 '''
 └─--[TaskTrain-{'do_preprocess': 'False'} (PENDING)]
@@ -135,13 +144,13 @@ d6tflow.preview([TaskTrain(do_preprocess=False)])
 Different models that were trained with different parameters can be easily loaded and compared. 
 
 ```python
-df_train = TaskPreprocess().output().load()
+df_train1 = TaskPreprocess().output().load()
 model1 = TaskTrain().output().load()
-print(sklearn.metrics.accuracy_score(df_train['y'],model1.predict(df_train.iloc[:,:-1])))
+print(sklearn.metrics.accuracy_score(df_train1['y'],model1.predict(df_train1.iloc[:,:-1])))
 
-df_train = TaskPreprocess(do_preprocess=False).output().load()
+df_train2 = TaskPreprocess(do_preprocess=False).output().load()
 model2 = TaskTrain(do_preprocess=False).output().load()
-print(sklearn.metrics.accuracy_score(df_train['y'],model2.predict(df_train.iloc[:,:-1])))
+print(sklearn.metrics.accuracy_score(df_train2['y'],model2.predict(df_train2.iloc[:,:-1])))
 
 ```
 
@@ -210,4 +219,10 @@ class Task1(tasks_factors.Task1):
 
 ## Bonus: centralize (local) data science files
 
+https://github.com/d6t/d6tpipe
+
 ## Bonus: keeping credentials safe
+
+https://d6tpipe.readthedocs.io/en/latest/advremotes.html#keeping-credentials-safe
+
+https://alexwlchan.net/2016/11/you-should-use-keyring/
