@@ -27,7 +27,7 @@ df = pd.read_csv('/path/i-dont/have/data.csv') # fails
 do_stuff(df)
 
 # or 
-impor os
+import os
 os.chdir('c:\\Users\\yourname\\desktop\\python') # fails
 
 ```
