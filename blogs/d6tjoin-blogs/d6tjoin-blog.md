@@ -2,7 +2,7 @@
 
 When you are working with data science projects, there are always cases you want to bring multiple tables together. In the most familiar case, you would find some identical values showing up in columns you want to join on and simply using pandas.merge method would finish the work. If this is the case, then you are lucky. But in real world projects, data usually come from disparate sources, so ID columns would not be as clean as expected because of misspelling or different data conventions. In this post, I will introduce you a package called [d6tjoin](https://github.com/d6t/d6tjoin), which is very powerful in fuzzy joining and will save your life from writing custom codes and getting trapped in the very begining of your project. 
 
-##Example
+## Example
 I have made up this example to illustrate what d6tjoin is capable of.
 
 Suppose several companies' stocks have gained my attention for a while and I have came up with a strategy to score those companies' performances in a 1-5 point scale. Backtesting on history data will help me evaluate if stock price really reflects those scores and find out how I want to trade according to those scores. 
@@ -20,7 +20,7 @@ The merged dataset would look like this:
 
 
 
-##Prejoin Analysis
+## Prejoin Analysis
 One thing best about d6tjoin is that it provides easy pre join diagnostic. This is particularly useful for detecting potential data problems even if you did't intend to do fuzzy join. 
 ```
 import d6tjoin
@@ -43,7 +43,7 @@ j.match_quality()
 It summarizes the number of matched/unmatched records for each join key.
 In our case, no ticker name are exactly matched and few dates are matched. This is why we need d6tjoin to help with fuzzy join.
 
-##Join with Misaligned Ids(names) and Dates
+## Join with Misaligned Ids(names) and Dates
 d6tjoin does best match joins on strings, dates and numbers. Its `MergeTop1()`object in `d6tjoin.top1` module is very versatile that gives you flexibility to define how you want to merge: exact or fuzzy on multiple keys using default or costumed difference functions. By default, distance of strings are calculated using Levenshtein distance.  
 
 In our example, both 'ticker' and 'date' are misaligned in the two datasets, so we need to do fuzzy join on both.
@@ -87,7 +87,7 @@ result['merged']
 
 Looks good! All the tickers in left are perfectly matched and dates from left are matched to the closest from the left.
 
-##Advanced Usage Option: Passing a Custom Difference Function
+## Advanced Usage Option: Passing a Custom Difference Function
 Now we have one last problem left. Remember that we want to assume scores would not be available until it was assigned. That means we want each row from df_price to be matched to a previously most recent score. But by default d6tjoin doesn't consider the order of dates but only match with the closest date either before or behind.
 
 To tackle this problem, we need to write a custom difference function.
