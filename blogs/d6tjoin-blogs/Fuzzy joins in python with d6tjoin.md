@@ -1,6 +1,10 @@
-# Efficient and Controllable Fuzzy Join
+# Fuzzy joins in python with d6tjoin
 
-When you are working with data science projects, there are always cases you want to bring multiple tables together. In the most familiar case, you would find some identical values showing up in columns you want to join on and simply using pandas.merge method would finish the work. If this is the case, then you are lucky. But in real world projects, data usually come from disparate sources, so ID columns would not be as clean as expected because of misspelling or different data conventions. In this post, I will introduce you a package called [d6tjoin](https://github.com/d6t/d6tjoin), which is very powerful in fuzzy joining and will save your life from writing custom codes and getting trapped in the very begining of your project. 
+## Combining different data sources is a time suck!
+Combining data from different sources can be a big time suck for data scientists. [d6tjoin](https://github.com/d6t/d6tjoin) is a python library that lets you join pandas dataframes quickly and efficiently.
+
+Coauthored with [Haijing Li](https://www.linkedin.com/in/haijing-li-7b50a11b2/), Data Analyst in Financial Services, MS Business Analytics@Columbia University.
+
 
 ## Example
 I have made up this example to illustrate what d6tjoin is capable of.
@@ -14,10 +18,6 @@ Information I need for backtesting is contained in the following two datasets: d
 ![df_score](./pic/df_score.png)
 
 To prepare for backtesting, I need to merge "score" column to df_price. Obviously, ticker name and date should be the merge keys. But there are two problems: 1.Values in "ticker" of df_price and of df_valuation are not identical; 2.Scores were recorded on a monthly basis and I want each row in df_price to be assigned with the most recent assuming next score would not be available until next update date.
-The merged dataset would look like this:
-
-
-
 
 
 ## Prejoin Analysis
@@ -34,14 +34,12 @@ except:
 
 After this, we know that the two tables are not all matched on merge keys. This would be more useful when you have larger size datasets and messier string identifier that you cannot tell by a glance if the two datasets have different key values.
 
-For our case, a more useful method is `Prejoin.match_quality()`
+For our case, a more useful method is `Prejoin.match_quality()`.It summarizes the number of matched/unmatched records for each join key. In our case, no ticker name are exactly matched and few dates are matched. This is why we need d6tjoin to help with fuzzy join.
 ```
 j.match_quality()
 ```
 ![match_quality()](./pic/match_quality.png)
 
-It summarizes the number of matched/unmatched records for each join key.
-In our case, no ticker name are exactly matched and few dates are matched. This is why we need d6tjoin to help with fuzzy join.
 
 ## Join with Misaligned Ids(names) and Dates
 d6tjoin does best match joins on strings, dates and numbers. Its `MergeTop1()`object in `d6tjoin.top1` module is very versatile that gives you flexibility to define how you want to merge: exact or fuzzy on multiple keys using default or costumed difference functions. By default, distance of strings are calculated using Levenshtein distance.  
@@ -51,7 +49,7 @@ In our example, both 'ticker' and 'date' are misaligned in the two datasets, so 
 ```
 result=d6tjoin.top1.MergeTop1(df_price,df_score,fuzzy_left_on=['ticker','date'],fuzzy_right_on=['ticker','date']).merge()
 ```
-Result is stored in a dictionary structure which contains two keys: `{'merged': a pandas dataframe of the merged result; 'top1': performance statistics and summary for each join key}`
+Result is stored in dictionary structure which contains two keys: `{'merged': a pandas dataframe of the merged result; 'top1': performance statistics and summary for each join key}`
 
 Let's take a look at the result:
 ```
@@ -85,22 +83,24 @@ result['merged']
 
 ![result](./pic/2attempt_result.png)
 
-Looks good! All the tickers in left are perfectly matched and dates from left are matched to the closest from the left.
+Looks good! All the tickers in left are perfectly matched and dates from left are matched to the closest from the right.
 
 ## Advanced Usage Option: Passing a Custom Difference Function
 Now we have one last problem left. Remember that we want to assume scores would not be available until it was assigned. That means we want each row from df_price to be matched to a previously most recent score. But by default d6tjoin doesn't consider the order of dates but only match with the closest date either before or behind.
 
-To tackle this problem, we need to write a custom difference function.
+To tackle this problem, we need to write a custom difference function: if date from left is previous to that from right, the calculated difference should be made large enough to let the match ignored.
 ```
 import numpy as np
 
 def diff_customized(x,y):
-    if np.busday_count(x,y)>0: #x is left_date and y is right_date,np_busday_count>0 means left_date is before right date
+    if np.busday_count(x,y)>0: #x is left_date and y is right_date,np_busday_count>0 means left_date is previous to right date
         diff_= 10000000000   #as large enough
     else:
         diff_=np.busday_count(x,y)    
     return abs(diff_)
 ```
+
+Now let’s parse the custom difference function in and see result.
 
 ```
 result=d6tjoin.top1.MergeTop1(df_price,df_score,fuzzy_left_on=['ticker','date'],fuzzy_right_on=['ticker','date'],fun_diff=[None,diff_customized],top_limit=[3,300]).merge()
@@ -114,6 +114,17 @@ result['merged']
 ![result](./pic/3attempt_result.png)
 
 Now we have our final merged dataset: price data without a previously assigned score are ignored and the others are each assigned with a previously most recent score.
+
+## Conclusion
+d6tjoin provides features including:
+- Pre join diagnostics to identify mismatched join keys
+- Best match joins that finds most similar value of misaligned ids, names and dates
+- Ability to customize difference functions, set max difference and other advanced features
+
+Check out [d6t library](https://github.com/d6t/d6t-python). It provides solutions to common data science problems including:
+- [d6tflow](https://github.com/d6t/d6tflow): build data science workflow
+- [d6tjoin](https://github.com/d6t/d6tjoin): quickly fuzzy joins
+- [d6tpipe](https://github.com/d6t/d6tpipe): quickly share and distribute data
 
 
 
