@@ -11,9 +11,9 @@
 * user flow: what is the user flow? where will the model be used? how does the user interact with the model?
 	* user pain points: pain points? how do they solve it today?
 
-* business goals: how does the model improve business outcomes?
+* business impact goals: how does the model improve business outcomes?
 	* critical bottleneck: what’s the critical problem that needs to be solved to have max impact?
-	* business metric: what business metric are we trying to influence?
+	* business metric: what business metric are we trying to impact?
 		* baseline: business metric status quo?
 	* ideal outcome: what’s the ideal outcome here? what goal should be met?
 	* success measure: how do we measure success?
