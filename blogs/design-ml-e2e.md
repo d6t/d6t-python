@@ -69,8 +69,8 @@ optional:
 ##  Data pipeline
 
 * Best practices
-	* use data DAGs
-	* modularize code
+	* use [d6tflow data DAGs](https://github.com/d6t/d6tflow)
+	* modularize code, see [d6tflow project templates for highly effective data science workflows](https://github.com/d6t/d6tflow-template)
 	* use unit tests
 	* don’t use jupyter notebooks, except viz or UI prototype
 
@@ -99,6 +99,8 @@ optional:
 * Biases: lookahead.  
 * AutoML output
 * Hypothesis on what should/should not work: Which features are most likely to predict? Which features should/should not predict?
+
+See [d6t EDA templates](https://github.com/d6t/d6tflow-template-datasci)
 
 ### Feature engineering
 
