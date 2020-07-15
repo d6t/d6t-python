@@ -1,5 +1,4 @@
-
-# Guide to managing end-to-end data science projects
+# Guide to managing data science projects from start to finish
 
 ## Problem formulation:
 
@@ -8,8 +7,10 @@
 * target users: who are the target users of information? 
 	* economic BUYER: who is the economic BUYER? 
 
-* user flow: what is the user flow? where will the information/model be used? how does the user interact with the model?
+* user flow: what is the user flow currently? 
 	* user pain points: pain points? how do they solve it today?
+	* improved workflow: where will the model be used? how does the user interact with the model?
+	* actionable insights: what practical value can the model provide to the user?
 
 * business impact goals: how does the model improve business outcomes?
 	* critical bottleneck: what’s the critical problem that needs to be solved to have max impact?
@@ -175,6 +176,15 @@ See [d6t EDA templates](https://github.com/d6t/d6tflow-template-datasci)
 	* Fewer features: remove marginal features
 	* Fewer trees: stop after achieved majority of gains
 * options: db vs API
+* integration with user-facing systems
 
 ### A / B testing
+
+## Driving user adoption
+
+* teachins
+* getting started guides
+* push model output
+* keep top of mind
+* integrating into workflow
 
