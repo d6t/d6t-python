@@ -1,19 +1,21 @@
 
-# Design of end-to-end machine learning systems
+# Guide to designing end-to-end machine learning systems
 
 ## Problem formulation:
 
 ### Business context / requirements
 
-* target users: who are the target users of information/system? 
-	* economic BUYER: who is the economic BUYER of the system? 
+* target users: who are the target users of information? 
+	* economic BUYER: who is the economic BUYER? 
 
-* user flow: what is the user flow? where will the model be used? how does the user interact with the model?
+* user flow: what is the user flow currently? 
 	* user pain points: pain points? how do they solve it today?
+	* improved workflow: where will the model be used? how does the user interact with the model?
+	* actionable insights: what practical value can the model provide to the user?
 
 * business impact goals: how does the model improve business outcomes?
 	* critical bottleneck: what’s the critical problem that needs to be solved to have max impact?
-	* business metric: what business metric are we trying to impact?
+	* business metric: how do we quantify success? what business metric are we trying to influence?
 		* baseline: business metric status quo?
 	* ideal outcome: what’s the ideal outcome here? what goal should be met?
 	* success measure: how do we measure success?
@@ -21,7 +23,7 @@
 
 ### Design goals
 
-* goals: goals of the system from a user perspective
+* goals: goals of the project from a user perspective
 * tradeoffs: ?
 	* biz intel vs real-time decision making
 	* accuracy: ?
@@ -39,22 +41,17 @@ optional:
 
 ### Target model output
 
+* modeling task: prediction, classification, recommendation, clustering?
 * model output: model should predict/produce what?
 	* how relate to business metric? direct vs approx/indirect measure?
-	* V 1.0 output: early model
 	* V ideal output: target model
+	* V 1.0 output: early model
 * supporting output: what does a full prediction look like? incl meta data
 
 ### Model evaluation
 
 * model score: which metric reflects success measure?
 * loss function: how to optimize the model score?
-
-### Infrastructure requirements/constraints
-
-* data prep: how large is input data?
-* model training: type and complexity of model?
-* dev vs prod: prod bottlenecks? storage/compute/memory
 
 ###  Roadmap/project plan
 
@@ -82,9 +79,19 @@ optional:
 	* Data dictionary available?
 * How much labeled data do you have?
 
+### Infrastructure requirements/constraints
+
+* data prep: how large is input data?
+* model training: type and complexity of model?
+* dev vs prod: prod bottlenecks? storage/compute/memory
+
 ### Data preprocessing
 
 * Data DAG: preparing data for analysis
+	* clean, clean, clean...
+	* combine
+	* reshape
+	* fill NANs
 
 ### Exploratory data analysis
 
@@ -109,20 +116,27 @@ See [d6t EDA templates](https://github.com/d6t/d6tflow-template-datasci)
 
 ### Feature preprocessing
 
+* Missing values
+* Categorical variables
+	* One-hot
+	* Embeddings (# dimensions): when a categorical column has many possible values
 * Normalize: N(0,1), mean relative
 * Look-ahead bias: real-time decision making issues
+	* N(0,1) across full dataset vs training/test separate
 * Fix quirks
+	* Imbalance: set class weights, sub/over-sample
 * Other transforms
 	* Dimension reduction
 		* PCA
 		* GBM feature encoding
 	* Embeddings
+* Sparse vector transform
 
 
 ## Model building
 
 * baseline models:
-* candidate models:
+* candidate models: linear, trees, SVM, (F)FM, neural net...
 	* ability to meet design goals?
 	* address tradeoffs: accuracy / interpretability / speed?
 	* handle quirks?
@@ -175,6 +189,20 @@ See [d6t EDA templates](https://github.com/d6t/d6tflow-template-datasci)
 	* Fewer features: remove marginal features
 	* Fewer trees: stop after achieved majority of gains
 * options: db vs API
+* integration with user-facing systems
 
 ### A / B testing
+
+### Retraining
+
+* how often does model need to be recalibrated
+* store prior model point-in-time predictions
+
+## Driving user adoption
+
+* teachins
+* getting started guides
+* push model output
+* keep top of mind
+* integrating into workflow
 
