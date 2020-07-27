@@ -6,7 +6,7 @@
 ### Business context / requirements
 
 * target users: who are the target users of information? 
-	* economic BUYER: who is the economic BUYER? 
+	* economic BUYER: who pays for it? 
 
 * user flow: what is the user flow currently? 
 	* user pain points: pain points? how do they solve it today?
@@ -93,6 +93,8 @@ optional:
 	* reshape
 	* fill NANs
 
+## Model building
+
 ### Exploratory data analysis
 
 * Look at the data!
@@ -114,6 +116,7 @@ See [d6t EDA templates](https://github.com/d6t/d6tflow-template-datasci)
 * Feature library:
 	* Interaction features
 
+
 ### Feature preprocessing
 
 * Missing values
@@ -129,11 +132,9 @@ See [d6t EDA templates](https://github.com/d6t/d6tflow-template-datasci)
 	* Dimension reduction
 		* PCA
 		* GBM feature encoding
-	* Embeddings
 * Sparse vector transform
 
-
-## Model building
+### Model selection and training
 
 * baseline models:
 * candidate models: linear, trees, SVM, (F)FM, neural net...
