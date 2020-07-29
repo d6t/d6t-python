@@ -6,7 +6,7 @@
 ### Business context / requirements
 
 * target users: who are the target users of information? 
-	* economic BUYER: who pays for it? 
+	* economic buyer: who pays for it? 
 
 * user flow: what is the user flow currently? 
 	* user pain points: pain points? how do they solve it today?
@@ -163,6 +163,7 @@ See [d6t EDA templates](https://github.com/d6t/d6tflow-template-datasci)
 	* In-sample: baseline vs model
 	* Out-sample: baseline vs model
 	* Bias-variance trade-off
+	* statistically significant uplift?
 * Visual inspection: sample. best/worst predictions. high influence.
 * Overfitting assessment
 	* Test lookahead bias
@@ -193,6 +194,9 @@ See [d6t EDA templates](https://github.com/d6t/d6tflow-template-datasci)
 * integration with user-facing systems
 
 ### A / B testing
+
+* performance inline with test?
+* statistically significant uplift?
 
 ### Retraining
 
