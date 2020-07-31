@@ -1,4 +1,4 @@
-# Unit Tests for Data Solutions
+# Unit Test Your Data Pipeline, You Will Thank Yourself Later
 One common mistake that data scientists, especially beginners, make is not writing unit tests. Data scientists sometimes argue that unit testing is not applicable because there is no correct answer to a model that can be known ahead of time or to test with. However, most data science projects start with data transformation. While you cannot test model output, at least you should test that inputs are correct. Compared to the time you invest in writing unit tests, good pieces of simple tests will save you much more time later, especially when working on large projects or big data.
 
 Coauthored with [Haijing Li](https://www.linkedin.com/in/haijing-li-7b50a11b2/), Data Analyst in Financial Services, MS Business Analytics@Columbia University.
