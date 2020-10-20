@@ -63,7 +63,7 @@ You can write tasks that you can chain together as a DAG:
             data = download_data()
             self.save(data) # save output data
 
-	@d6tflow.requires(TaskGetData) # define dependency
+    @d6tflow.requires(TaskGetData) # define dependency
     class TaskProcess(d6tflow.tasks.TaskPqPandas):
 
         def run(self):
@@ -103,7 +103,7 @@ Below is a stylized example of a machine learning flow which is expressed as a D
             data = clean_data(data)
             self.save(data) # quickly save dataframe
 
-	@d6tflow.requires(TaskGetData) # define dependency
+    @d6tflow.requires(TaskGetData) # define dependency
     class TaskPreprocess(d6tflow.tasks.TaskCachePandas):  # save data in memory
         do_preprocess = luigi.BoolParameter(default=True) # parameter for preprocessing yes/no
 
@@ -113,19 +113,19 @@ Below is a stylized example of a machine learning flow which is expressed as a D
                 df_train = preprocess(df_train)
             self.save(df_train)
 
-	@d6tflow.requires(TaskPreprocess) # define dependency
+    @d6tflow.requires(TaskPreprocess) # define dependency
     class TaskTrain(d6tflow.tasks.TaskPickle): # save output as pickle
 
         def run(self):
-			df_train = self.input().load()
-			if self.model=='ols':
-				model = sklearn.linear_model.LogisticRegression()
-			elif self.model=='svm':
-				model = sklearn.svm.SVC()
-			else:
-				raise ValueError('invalid model selection')
-			model.fit(df_train.drop('y',1), df_train['y'])
-			self.save(model)
+            df_train = self.input().load()
+            if self.model=='ols':
+                model = sklearn.linear_model.LogisticRegression()
+            elif self.model=='svm':
+                model = sklearn.svm.SVC()
+            else:
+                raise ValueError('invalid model selection')
+            model.fit(df_train.drop('y',1), df_train['y'])
+            self.save(model)
 
     # Check task dependencies and their execution status
     d6tflow.preview(TaskTrain())
@@ -152,7 +152,7 @@ Below is a stylized example of a machine learning flow which is expressed as a D
     # Load task output to pandas dataframe and model object for model evaluation
     model = TaskTrain().output().load()
     df_train = TaskPreprocess().output().load()
-	print(model.score(df_train.drop('y',1), df_train['y']))
+    print(model.score(df_train.drop('y',1), df_train['y']))
     # 0.9733333333333334
 
 Conclusion
