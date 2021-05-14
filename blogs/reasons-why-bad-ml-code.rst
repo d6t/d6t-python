@@ -39,7 +39,7 @@ What to do about it?
 
 Instead of linearly chaining functions, data science code is better written as a set of tasks with dependencies between them. That is your data science workflow should be a DAG.
 
-[d6tflow](https://github.com/d6t/d6tflow) is a free open-source library which makes it easy for you to build highly effective data science workflows.
+`d6tflow <https://github.com/d6t/d6tflow>`_ is a free open-source library which makes it easy for you to build highly effective data science workflows.
 
 Instead of writing a function that does:
 
